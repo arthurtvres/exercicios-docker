@@ -4,14 +4,14 @@ Coleção completa de 8 exercícios práticos para aprender Docker e Docker Comp
 
 ## 📋 Índice de Exercícios
 
-1. [**Imagem Alpine com Saudação**](#exercício-1---imagem-alpine-com-saudação) - Básico
-2. [**Aplicação Node.js**](#exercício-2---aplicação-nodejs) - Intermediário
-3. [**Multi-stage Build Java**](#exercício-3---multi-stage-build-java) - Intermediário
-4. [**Docker Compose com Healthcheck**](#exercício-4---docker-compose-com-healthcheck) - Intermediário
-5. [**Acesso Seguro ao PostgreSQL**](#exercício-5---acesso-seguro-ao-postgresql) - Avançado
-6. [**Frontend com Hot-Reload**](#exercício-6---frontend-com-hot-reload) - Intermediário
-7. [**Pipeline CI Local**](#exercício-7---pipeline-ci-local) - Avançado
-8. [**Variáveis e Configs Seguros**](#exercício-8---variáveis-e-configs-seguros) - Avançado
+1. [**Imagem Alpine com Saudação**](#exercício-1---imagem-alpine-com-saudação) 
+2. [**Aplicação Node.js**](#exercício-2---aplicação-nodejs) 
+3. [**Multi-stage Build Java**](#exercício-3---multi-stage-build-java)
+4. [**Docker Compose com Healthcheck**](#exercício-4---docker-compose-com-healthcheck)
+5. [**Acesso Seguro ao PostgreSQL**](#exercício-5---acesso-seguro-ao-postgresql) 
+6. [**Frontend com Hot-Reload**](#exercício-6---frontend-com-hot-reload)
+7. [**Pipeline CI Local**](#exercício-7---pipeline-ci-local)
+8. [**Variáveis e Configs Seguros**](#exercício-8---variáveis-e-configs-seguros)
 
 ---
 
