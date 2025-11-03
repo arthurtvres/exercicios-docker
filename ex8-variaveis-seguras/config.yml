@@ -1,0 +1,30 @@
+# Configurações da Aplicação
+# Este arquivo é montado como somente leitura no container
+
+app:
+  name: "API Segura"
+  version: "2.0.0"
+  description: "Demonstração de configurações seguras com Docker Compose"
+
+features:
+  - authentication
+  - rate-limiting
+  - logging
+  - monitoring
+
+server:
+  timeout: 30000
+  maxConnections: 100
+
+logging:
+  level: "info"
+  format: "json"
+  destinations:
+    - console
+    - file
+
+security:
+  corsEnabled: true
+  helmetEnabled: true
+  rateLimitWindow: 900000  # 15 minutos
+  rateLimitMax: 100

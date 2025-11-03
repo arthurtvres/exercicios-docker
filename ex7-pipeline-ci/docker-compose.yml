@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  # Registry local para armazenar imagens
+  registry:
+    image: registry:2
+    container_name: local-registry
+    ports:
+      - "5000:5000"
+    volumes:
+      - registry_data:/var/lib/registry
+    networks:
+      - ci-network
+
+  # Docker-in-Docker para builds
+  docker:
+    image: docker:24-dind
+    container_name: docker-daemon
+    privileged: true
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    volumes:
+      - docker-data:/var/lib/docker
+    networks:
+      - ci-network
+
+  # Builder - Constrói a imagem
+  builder:
+    image: docker:24
+    container_name: ci-builder
+    depends_on:
+      - docker
+      - registry
+    environment:
+      DOCKER_HOST: tcp://docker:2375
+    volumes:
+      - ./app:/workspace
+    working_dir: /workspace
+    command: sh -c "
+      echo '🔨 Iniciando build da aplicação...' &&
+      docker build -t localhost:5000/myapp:latest . &&
+      echo '✅ Build concluído!' &&
+      echo '📦 Enviando para registry local...' &&
+      docker push localhost:5000/myapp:latest &&
+      echo '🎉 Imagem publicada com sucesso!'
+      "
+    networks:
+      - ci-network
+
+  # App - Executa testes
+  app:
+    image: python:3.11-alpine
+    container_name: ci-tester
+    depends_on:
+      - builder
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: sh -c "
+      echo '🧪 Instalando dependências de teste...' &&
+      pip install pytest pytest-cov --quiet &&
+      echo '🧪 Executando testes...' &&
+      pytest -v --cov=. tests/ &&
+      echo '✅ Todos os testes passaram!'
+      "
+    networks:
+      - ci-network
+
+volumes:
+  registry_data:
+  docker-data:
+
+networks:
+  ci-network:
+    driver: bridge
